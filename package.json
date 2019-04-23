@@ -1,7 +1,7 @@
 {
-  "name": "react-bootstrap",
+  "name": "surreal-estate-app",
   "version": "1.0.0",
-  "description": "react bootstrap application",
+  "description": "surreal estate app based on react bootstrap by mcr codes",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -10,16 +10,16 @@
   "keywords": [
     "react"
   ],
-  "author": "Manchester Codes",
+  "author": "Vitnija Bluzma",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MCRcodes/react-bootstrap.git"
+    "url": "git+https://github.com/thepunkyone/surreal-estate-app.git"
   },
   "bugs": {
-    "url": "https://github.com/MCRcodes/react-bootstrap/issues"
+    "url": "https://github.com/thepunkyone/surreal-estate-app/issues"
   },
-  "homepage": "https://github.com/MCRcodes/react-bootstrap#readme",
+  "homepage": "https://github.com/thepunkyone/surreal-estate-app#readme",
   "dependencies": {
     "prop-types": "^15.6.1",
     "raf": "^3.4.0",
