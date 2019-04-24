@@ -7,14 +7,18 @@ class AddProperty extends React.Component {
     this.state = {
       fields: {
         title: '',
+        type: 'Manchester',
       },
     };
   }
 
   handleAddProperty = (event) => {
     event.preventDefault();
-    this.setState({ fields: { title: event.target.value } });
     console.log(this.state.fields);
+  };
+
+  handleFieldChange = (event) => {
+    this.setState({ fields: { [event.target.name]: event.target.value } });
   };
 
   render() {
@@ -23,11 +27,19 @@ class AddProperty extends React.Component {
         <form>
           <label>
             Title:
-            <input type="text" />
+            <input name="title" value={this.state.fields.title} type="text" onChange={this.handleFieldChange} />
           </label>
           <label>
             Type:
-            <input type="text" />
+            <select name="type" value={this.state.fields.type} onChange={this.handleFieldChange}>
+              <option value="Flat">Flat</option>
+              <option value="Detached">Detached</option>
+              <option value="Semi-Detached">Semi-Detached</option>
+              <option value="Terraced">Terraced</option>
+              <option value="End of Terrace">End of Terrace</option>
+              <option value="Cottage">Cottage</option>
+              <option value="Bungalow">Bungalow</option>
+            </select>
           </label>
           <label>
             Bedrooms:
@@ -49,7 +61,7 @@ class AddProperty extends React.Component {
             Email:
             <input type="email" />
           </label>
-          <button type="sumbit" onSubmit={this.handleAddProperty}>Add</button>
+          <button type="submit" onClick={this.handleAddProperty}>Add</button>
         </form>
       </div>
     );
