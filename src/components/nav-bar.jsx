@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style/nav-bar.css';
+import { Link } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
