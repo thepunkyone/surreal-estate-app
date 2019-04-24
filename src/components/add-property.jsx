@@ -8,6 +8,11 @@ class AddProperty extends React.Component {
       fields: {
         title: '',
         type: 'Manchester',
+        bedrooms: 0,
+        bathrooms: 0,
+        price: 0,
+        city: '',
+        email: '',
       },
     };
   }
@@ -18,7 +23,7 @@ class AddProperty extends React.Component {
   };
 
   handleFieldChange = (event) => {
-    this.setState({ fields: { [event.target.name]: event.target.value } });
+    this.setState({ fields: { ... { [event.target.name]: event.target.value } } });
   };
 
   render() {
@@ -26,11 +31,11 @@ class AddProperty extends React.Component {
       <div className="add-property">
         <form>
           <label>
-            Title:
+            <span>Title:</span>
             <input name="title" value={this.state.fields.title} type="text" onChange={this.handleFieldChange} />
           </label>
           <label>
-            Type:
+            <span>Type:</span>
             <select name="type" value={this.state.fields.type} onChange={this.handleFieldChange}>
               <option value="Flat">Flat</option>
               <option value="Detached">Detached</option>
@@ -42,24 +47,29 @@ class AddProperty extends React.Component {
             </select>
           </label>
           <label>
-            Bedrooms:
-            <input type="number" />
+            <span>Bedrooms:</span>
+            <input name="bedrooms" value={this.state.fields.bedrooms} type="number" onChange={this.handleFieldChange} />
           </label>
           <label>
-            Bathrooms:
-            <input type="number" />
+            <span>Bathrooms:</span>
+            <input name="bathrooms" value={this.state.fields.bathrooms} type="number" onChange={this.handleFieldChange} />
           </label>
           <label>
-            Price:
-            <input type="number" />
+            <span>Price:</span>
+            <input name="price" value={this.state.fields.price} type="number" onChange={this.handleFieldChange} />
           </label>
           <label>
-            City:
-            <input type="text" />
+            <span>City:</span>
+            <select name="city" value={this.state.fields.city} onChange={this.handleFieldChange}>
+              <option value="Manchester">Manchester</option>
+              <option value="Leeds">Leeds</option>
+              <option value="Sheffield">Sheffield</option>
+              <option value="Liverpool">Liverpool</option>
+            </select>
           </label>
           <label>
-            Email:
-            <input type="email" />
+            <span>Email:</span>
+            <input name="email" value={this.state.fields.email} type="email" onChange={this.handleFieldChange} />
           </label>
           <button type="submit" onClick={this.handleAddProperty}>Add</button>
         </form>
