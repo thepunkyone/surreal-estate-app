@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../style/add-property.css';
 
-class AddProperty extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fields: {
-        title: '',
-        type: 'Flat',
-        bedrooms: 0,
-        bathrooms: 0,
-        price: 0,
-        city: 'Manchester',
-        email: '',
-      },
-    };
-  }
+class AddProperty extends Component {
+  state = {
+    fields: {
+      title: '',
+      type: 'Flat',
+      bedrooms: 0,
+      bathrooms: 0,
+      price: 0,
+      city: 'Manchester',
+      email: '',
+    },
+  };
 
   handleAddProperty = (event) => {
     event.preventDefault();
@@ -23,13 +20,18 @@ class AddProperty extends React.Component {
   };
 
   handleFieldChange = (event) => {
-    this.setState({ fields: { ... { [event.target.name]: event.target.value } } });
+    this.setState({
+      fields: {
+        ...this.state.fields,
+        [event.target.name]: event.target.value,
+      },
+    });
   };
 
   render() {
     return (
       <div className="add-property">
-        <form>
+        <form onSubmit={this.handleAddProperty}>
           <label>
             <span>Title:</span>
             <input name="title" value={this.state.fields.title} type="text" placeholder="The property tagline" onChange={this.handleFieldChange} />
@@ -71,7 +73,7 @@ class AddProperty extends React.Component {
             <span>Email:</span>
             <input name="email" value={this.state.fields.email} type="email" placeholder="Contact email" onChange={this.handleFieldChange} />
           </label>
-          <button type="submit" onClick={this.handleAddProperty}>Add</button>
+          <button type="submit" value="Submit">Add</button>
         </form>
       </div>
     );
