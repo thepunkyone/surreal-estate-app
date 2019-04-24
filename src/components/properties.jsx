@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const Properties = () => <div>Properties Page</div>;
+const Properties = () => <Fragment>Properties Page</Fragment>;
 
 export default Properties;

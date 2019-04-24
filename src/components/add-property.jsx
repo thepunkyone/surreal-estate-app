@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const AddProperty = () => <div>Add Property Page</div>;
+const AddProperty = () => <Fragment>Add Property Page</Fragment>;
 
 export default AddProperty;
