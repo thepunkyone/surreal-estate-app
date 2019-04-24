@@ -27,6 +27,11 @@
   display: inline-block;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .item:hover {
   cursor: pointer;
   background: lavender;

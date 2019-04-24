@@ -16,10 +16,10 @@ const NavBar = () => {
         <FontAwesomeIcon icon="igloo" className="logo-icon fa-lg" />
         Surreal Estate
       </div>
-      <ul className="nav">
-        <li className="item">View Properties</li>
-        <li className="item">Add a Property</li>
-      </ul>
+      <div className="nav">
+        <Link className="item" to="/">View Properties</Link>
+        <Link className="item" to="/add-property">Add a Property</Link>
+      </div>
     </div>
   );
 };
