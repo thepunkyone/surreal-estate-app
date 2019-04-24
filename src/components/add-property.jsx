@@ -7,11 +7,11 @@ class AddProperty extends React.Component {
     this.state = {
       fields: {
         title: '',
-        type: 'Manchester',
+        type: 'Flat',
         bedrooms: 0,
         bathrooms: 0,
         price: 0,
-        city: '',
+        city: 'Manchester',
         email: '',
       },
     };
@@ -32,7 +32,7 @@ class AddProperty extends React.Component {
         <form>
           <label>
             <span>Title:</span>
-            <input name="title" value={this.state.fields.title} type="text" onChange={this.handleFieldChange} />
+            <input name="title" value={this.state.fields.title} type="text" placeholder="The property tagline" onChange={this.handleFieldChange} />
           </label>
           <label>
             <span>Type:</span>
@@ -69,7 +69,7 @@ class AddProperty extends React.Component {
           </label>
           <label>
             <span>Email:</span>
-            <input name="email" value={this.state.fields.email} type="email" onChange={this.handleFieldChange} />
+            <input name="email" value={this.state.fields.email} type="email" placeholder="Contact email" onChange={this.handleFieldChange} />
           </label>
           <button type="submit" onClick={this.handleAddProperty}>Add</button>
         </form>
