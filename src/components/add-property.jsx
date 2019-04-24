@@ -13,14 +13,43 @@ class AddProperty extends React.Component {
 
   handleAddProperty = (event) => {
     event.preventDefault();
+    this.setState({ fields: { title: event.target.value } });
     console.log(this.state.fields);
   };
 
   render() {
     return (
       <div className="add-property">
-        <form onSubmit={this.handleAddProperty}>
-          <button type="sumbit">Add</button>
+        <form>
+          <label>
+            Title:
+            <input type="text" />
+          </label>
+          <label>
+            Type:
+            <input type="text" />
+          </label>
+          <label>
+            Bedrooms:
+            <input type="number" />
+          </label>
+          <label>
+            Bathrooms:
+            <input type="number" />
+          </label>
+          <label>
+            Price:
+            <input type="number" />
+          </label>
+          <label>
+            City:
+            <input type="text" />
+          </label>
+          <label>
+            Email:
+            <input type="email" />
+          </label>
+          <button type="sumbit" onSubmit={this.handleAddProperty}>Add</button>
         </form>
       </div>
     );
