@@ -2,3 +2,32 @@
   background: white;
   border-bottom: 2px solid gray;
 }
+
+.logo {
+  padding: 10px 40px 10px 20px;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo-icon {
+  padding-right: 8px; 
+}
+
+.nav {
+  margin: 0;
+  padding: 0;
+  height:100%;
+  display: inline-block;
+  font-size: 19px;
+}
+
+.item {
+  padding: 12px 20px;
+  display: inline-block;
+}
+
+.item:hover {
+  cursor: pointer;
+  background: lavender;
+}

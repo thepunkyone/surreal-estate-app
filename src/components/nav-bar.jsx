@@ -12,9 +12,13 @@ const NavBar = () => {
   return (
     <div className="nav-bar">
       <div className="logo">
-        <FontAwesomeIcon icon="igloo" className="logo-icon" />
+        <FontAwesomeIcon icon="igloo" className="logo-icon fa-lg" />
         Surreal Estate
       </div>
+      <ul className="nav">
+        <li className="item">View Properties</li>
+        <li className="item">Add a Property</li>
+      </ul>
     </div>
   );
 };
