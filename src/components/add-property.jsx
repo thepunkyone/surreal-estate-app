@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Alert from './alert';
 import axios from 'axios';
 import '../style/add-property.css';
 
