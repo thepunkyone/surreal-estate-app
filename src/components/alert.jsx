@@ -1,10 +1,13 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Alert extends Component {
   constructor(message, success) {
-    super();
-    this.message = message;
-    this.success = success;
+    super(message, success);
+    this.props = {
+      message: message,
+      success: success,
+    };
   }
 
   render() {
@@ -15,6 +18,11 @@ class Alert extends Component {
 Alert.defaultProps = {
   message: 'Error!',
   success: false,
+};
+
+Alert.propTypes = {
+  message: PropTypes.string,
+  success: PropTypes.bool,
 };
 
 
