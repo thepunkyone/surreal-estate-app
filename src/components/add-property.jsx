@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Alert from './alert';
 import axios from 'axios';
+import Alert from './alert';
+import apiUrl from '../config';
 import '../style/add-property.css';
 
 class AddProperty extends Component {
@@ -27,7 +28,7 @@ class AddProperty extends Component {
       isError: false,
     });
     axios.post(
-      'http://localhost:3000/api/v1/PropertyListing/',
+      `${apiUrl}/PropertyListing/`,
       this.state.fields
     )
       .then(() => {
@@ -36,7 +37,7 @@ class AddProperty extends Component {
           isSuccess: true,
         });
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           alertMessage: 'Server error, please try again later!',
           isError: true,

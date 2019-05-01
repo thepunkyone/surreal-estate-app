@@ -2,9 +2,8 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import PropertyCard from './property-card';
 import Alert from './alert';
+import apiUrl from '../config';
 import '../style/properties.css';
-
-const apiUrl = 'http://localhost:3000/api/v1';
 
 class Properties extends Component {
   constructor(props) {
