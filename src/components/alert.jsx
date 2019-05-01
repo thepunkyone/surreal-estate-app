@@ -9,8 +9,8 @@ const Alert = ({ message, success }) => (
 );
 
 Alert.propTypes = {
-  message: PropTypes.string,
-  success: PropTypes.bool,
+  message: PropTypes.string.isRequired,
+  success: PropTypes.bool.isRequired,
 };
 
 
