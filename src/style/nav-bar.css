@@ -1,6 +1,5 @@
 .nav-bar {
   background: white;
-  border-bottom: 2px solid gray;
 }
 
 .logo {
@@ -12,6 +11,7 @@
 
 .logo-icon {
   padding-right: 8px; 
+  color: rgb(57, 57, 107);
 }
 
 .nav {
