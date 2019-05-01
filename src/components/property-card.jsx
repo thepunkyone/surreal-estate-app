@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import '../style/property-card.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import { faIgloo, faBath, faBed, faPoundSign, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faIgloo);
+library.add(faIgloo, faBath, faBed, faPoundSign, faEnvelope);
 
 const PropertyCard = ({
   title,
@@ -28,18 +28,22 @@ const PropertyCard = ({
         <span className="city">{city}</span>
       </div>
       <div>
-        <FontAwesomeIcon icon="igloo" />
+        <FontAwesomeIcon icon="bath" />
         <span className="bathrooms">{bathrooms}</span>
       </div>
       <div>
-        <FontAwesomeIcon icon="igloo" />
+        <FontAwesomeIcon icon="bed" />
         <span className="bedrooms">{bedrooms}</span>
       </div>
       <div>
-        <FontAwesomeIcon icon="igloo" />
+        <FontAwesomeIcon icon="pound-sign" />
         <span className="price">{price}</span>
       </div>
       <div className="email">{email}</div>
+      <a className="email-button" href={`mailto:${email}?Subject="${title}" target="_top"`}>
+        <FontAwesomeIcon icon="envelope" />
+        <span>EMail</span>
+      </a>
     </div>
   );
 };
