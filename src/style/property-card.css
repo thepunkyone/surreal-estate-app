@@ -12,6 +12,10 @@
   color: rgb(57, 57, 107);
 }
 
+.title {
+  margin-bottom: 8px;
+}
+
 .property-card span {
   width: auto;
   padding: 4px;
@@ -19,6 +23,10 @@
 
 .property-card .type {
   padding-left: 0;
+}
+
+.type, .city {
+  font-style: italic;
 }
 
 .email {
