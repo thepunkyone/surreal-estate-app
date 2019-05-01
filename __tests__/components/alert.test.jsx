@@ -2,13 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Alert from '../../src/components/alert';
 
-describe('Alert component test', () => {
-  const wrapper = shallow((<Alert />));
+describe('Alert component renders an error message', () => {
+  const wrapper = shallow((<Alert message="Error!" />));
 
-  it('The default message of Alert component is Error!', () => {
-    expect(wrapper.text()).toEqual('Error!');
+  it('Error message displayed in inner HTML', () => {
+    expect(wrapper.find('.alert').text()).toBe('Error!');
   });
-  it('The default value of Alert component\'s success prop is false', () => {
-    expect(wrapper.prop('success')).toEqual(false);
+});
+
+describe('Alert component renders a success message', () => {
+  const wrapper = shallow((<Alert message="Success!!!" success />));
+
+  it('Success message displayed in inner HTML', () => {
+    expect(wrapper.find('.alert.success').text()).toBe('Success!!!');
   });
 });

@@ -14,19 +14,33 @@ class AddProperty extends Component {
       city: 'Manchester',
       email: '',
     },
+    alertMessage: '',
+    isSuccess: false,
+    isError: false,
   };
 
   handleAddProperty = (event) => {
     event.preventDefault();
+    this.setState({
+      alertMessage: '',
+      isSuccess: false,
+      isError: false,
+    });
     axios.post(
       'http://localhost:3000/api/v1/PropertyListing/',
       this.state.fields
     )
-      .then(function (response) {
-        console.log('success', response);
+      .then(() => {
+        this.setState({
+          alertMessage: 'Property added to catalogue!',
+          isSuccess: true,
+        });
       })
-      .catch(function (error) {
-        console.log('error', error);
+      .catch((error) => {
+        this.setState({
+          alertMessage: 'Server error, please try again later!',
+          isError: true,
+        });
       });
   };
 
@@ -43,6 +57,8 @@ class AddProperty extends Component {
     return (
       <div className="add-property">
         <form onSubmit={this.handleAddProperty}>
+          {this.state.isSuccess && <Alert message={this.state.alertMessage} success />}
+          {this.state.isError && <Alert message={this.state.alertMessage} />}
           <label>
             <span>Title:</span>
             <input name="title" value={this.state.fields.title} type="text" placeholder="The property tagline" onChange={this.handleFieldChange} />

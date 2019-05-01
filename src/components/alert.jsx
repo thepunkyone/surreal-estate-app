@@ -1,24 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import '../../src/style/alert.css';
 
-class Alert extends Component {
-  constructor(message, success) {
-    super(message, success);
-    this.props = {
-      message: message,
-      success: success,
-    };
-  }
-
-  render() {
-    return <div className="alert" message={this.props.message} success={this.props.success}>{this.props.message}</div>;
-  }
-}
-
-Alert.defaultProps = {
-  message: 'Error!',
-  success: false,
-};
+const Alert = ({ message, success }) => (
+  <div className={`alert${success ? ' success' : ''}`}>
+    {message}
+  </div>
+);
 
 Alert.propTypes = {
   message: PropTypes.string,
