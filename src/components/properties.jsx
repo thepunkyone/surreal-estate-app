@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import PropertyCard from './property-card';
 import Alert from './alert';
+import '../style/properties.css';
 
 class Properties extends Component {
   constructor(props) {
@@ -27,20 +28,22 @@ class Properties extends Component {
     return (
       <Fragment>
         {this.state.isError && <Alert message="Server error! Could not retrieve properties." />}
-        {this.state.properties.map(property => {
-          return (
-            <PropertyCard
-              key={property._id}
-              title={property.title}
-              type={property.type}
-              bathrooms={property.bathrooms}
-              bedrooms={property.bedrooms}
-              price={property.price}
-              city={property.city}
-              email={property.email}
-            />
-          );
-        })}
+        <div className="properties">
+          {this.state.properties.map(property => {
+            return (
+              <PropertyCard
+                key={property._id}
+                title={property.title}
+                type={property.type}
+                bathrooms={property.bathrooms}
+                bedrooms={property.bedrooms}
+                price={property.price}
+                city={property.city}
+                email={property.email}
+              />
+            );
+          })}
+        </div>
       </Fragment>
     );
   }

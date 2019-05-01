@@ -1,0 +1,11 @@
+.properties {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.property-card {
+  margin: 5px;
+  width: 30%;
+}
