@@ -7,9 +7,9 @@ describe('PropertyCard component test', () => {
     <PropertyCard
       title="A quirky little house!"
       type="Semi-Detached"
-      bathrooms="1"
-      bedrooms="3"
-      price="210000"
+      bathrooms={1}
+      bedrooms={3}
+      price={210000}
       city="Manchester"
       email="thepunkyone@hotmail.com"
     />
