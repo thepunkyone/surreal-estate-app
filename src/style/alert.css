@@ -1,11 +1,13 @@
 .alert {
-  color: red;
+  color: rgb(131, 0, 0);
   background: rgb(221, 158, 158);
   border: 1px solid red;
+  text-align: center;
+  padding: 5px;
 }
 
 .alert.success {
-  color: green;
+  color: rgb(0, 90, 0);
   background: rgb(180, 255, 180);
   border: 1px solid green;
 }
