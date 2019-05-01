@@ -16,11 +16,11 @@ class Properties extends Component {
   componentDidMount() {
     const url = 'http://localhost:3000/api/v1/PropertyListing/';
     axios.get(url)
-      .then(({ data }) => {
-        this.setState({ ...this.state, properties: data });
+      .then(({ data: properties }) => {
+        this.setState({ properties });
       })
       .catch(() => {
-        this.setState({ ...this.state, isError: true });
+        this.setState({ isError: true });
       });
   }
 
@@ -33,13 +33,7 @@ class Properties extends Component {
             return (
               <PropertyCard
                 key={property._id}
-                title={property.title}
-                type={property.type}
-                bathrooms={property.bathrooms}
-                bedrooms={property.bedrooms}
-                price={property.price}
-                city={property.city}
-                email={property.email}
+                {...property} //use of spread operator from walkthrough
               />
             );
           })}
