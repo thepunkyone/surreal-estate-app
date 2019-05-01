@@ -4,6 +4,8 @@ import PropertyCard from './property-card';
 import Alert from './alert';
 import '../style/properties.css';
 
+const apiUrl = 'http://localhost:3000/api/v1';
+
 class Properties extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class Properties extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:3000/api/v1/PropertyListing/';
+    const url = `${apiUrl}/PropertyListing/`;
     axios.get(url)
       .then(({ data: properties }) => {
         this.setState({ properties });
