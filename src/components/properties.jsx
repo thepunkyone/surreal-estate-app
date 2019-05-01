@@ -41,6 +41,6 @@ class Properties extends Component {
       </Fragment>
     );
   }
-};
+}
 
 export default Properties;
