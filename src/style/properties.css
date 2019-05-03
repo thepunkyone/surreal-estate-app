@@ -1,8 +1,21 @@
+.flex-wrapper {
+  display: flex;
+}
+
+.city-search {
+  width: 15%;
+  height: 100vh;
+}
+
+.city-search a, .city-search span {
+  display: block;
+}
+
 .properties {
   display: flex;
-  width: 100%;
+  width: 85%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .property-card {
