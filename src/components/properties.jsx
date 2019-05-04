@@ -18,10 +18,9 @@ class Properties extends Component {
 
   buildQueryString = (operation, valueObj) => {
     const { search } = this.props.location;
-    const locationObj = qs.parse(search, { ignoreQueryPrefix: true });
-    const newLocationObj = { ...locationObj, [operation]: JSON.stringify(valueObj) };
-    
-    return qs.stringify(newLocationObj, { addQueryPrefix: true, encoding: false });
+    const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
+    const newQueryParams = { ...currentQueryParams, [operation]: JSON.stringify(valueObj) };
+    return qs.stringify(newQueryParams, { addQueryPrefix: true, encoding: false });
   };
 
   componentDidMount() {
@@ -55,13 +54,13 @@ class Properties extends Component {
         <div className="flex-wrapper">
           <div className="sort-fields">
             <span className="filter-title">Filter by city</span>
-            <Link to={this.buildQueryString('query', { 'city': 'Manchester' })}>Manchester</Link>
-            <Link to={this.buildQueryString('query', { 'city': 'Leeds' })}>Leeds</Link>
-            <Link to={this.buildQueryString('query', { 'city': 'Sheffield' })}>Sheffield</Link>
-            <Link to={this.buildQueryString('query', { 'city': 'Liverpool' })}>Liverpool</Link>
+            <Link to={this.buildQueryString('query', { city: 'Manchester' })}>Manchester</Link>
+            <Link to={this.buildQueryString('query', { city: 'Leeds' })}>Leeds</Link>
+            <Link to={this.buildQueryString('query', { city: 'Sheffield' })}>Sheffield</Link>
+            <Link to={this.buildQueryString('query', { city: 'Liverpool' })}>Liverpool</Link>
             <span className="filter-title">Sort by</span>
-            <Link to={this.buildQueryString('sort', { 'price': '1' })}>Price Ascending</Link>
-            <Link to={this.buildQueryString('sort', { 'price': '-1' })}>Price Descending</Link>
+            <Link to={this.buildQueryString('sort', { price: 1 })}>Price Ascending</Link>
+            <Link to={this.buildQueryString('sort', { price: -1 })}>Price Descending</Link>
           </div>
           <div className="properties">
             {this.state.properties.map(property => {
