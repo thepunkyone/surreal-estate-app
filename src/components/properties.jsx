@@ -20,7 +20,13 @@ class Properties extends Component {
   buildQueryString = (operation, valueObj) => {
     const { search } = this.props.location;
     const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
-    const newQueryParams = { ...currentQueryParams, [operation]: JSON.stringify(valueObj) };
+    const newQueryParams = {
+      ...currentQueryParams,
+      [operation]: JSON.stringify({
+        ...JSON.parse(currentQueryParams[operation] || '{}'),
+        ...valueObj,
+      }),
+    };
     return qs.stringify(newQueryParams, { addQueryPrefix: true, encoding: false });
   };
 
