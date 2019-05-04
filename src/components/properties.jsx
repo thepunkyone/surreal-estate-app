@@ -7,6 +7,12 @@ import Alert from './alert';
 import apiUrl from '../config';
 import '../style/properties.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faSearch);
+
 class Properties extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +80,9 @@ class Properties extends Component {
                 value={this.state.search}
                 onChange={event => this.setState({ search: event.target.value })}
               />
-              <button type="submit" value="Submit">Search</button>
+              <button type="submit" value="Submit">
+                <FontAwesomeIcon icon="search" className="search-icon" />
+              </button>
             </form>
             <span className="filter-title">Filter by city</span>
             <Link to={this.buildQueryString('query', { city: 'Manchester' })}>Manchester</Link>

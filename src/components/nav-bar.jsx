@@ -19,6 +19,7 @@ const NavBar = () => {
       <div className="nav">
         <Link className="item" to="/">View Properties</Link>
         <Link className="item" to="/add-property">Add a Property</Link>
+        <Link className="item">Sign In With Facebook</Link>
       </div>
     </div>
   );
