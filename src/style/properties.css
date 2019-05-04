@@ -23,7 +23,7 @@
   display: flex;
   width: 85%;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .property-card {

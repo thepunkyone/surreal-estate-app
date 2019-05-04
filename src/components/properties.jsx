@@ -12,6 +12,7 @@ class Properties extends Component {
     super(props);
     this.state = {
       properties: [],
+      search: '',
       isError: false,
     };
   }
@@ -47,12 +48,28 @@ class Properties extends Component {
     }
   }
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { search } = this.state;
+    const newQueryString = this.buildQueryString('query', { title: { $regex: search } });
+    const { history } = this.props;
+    history.push(newQueryString);
+  };
+
   render() {
     return (
       <Fragment>
         {this.state.isError && <Alert message="Server error! Could not retrieve properties." />}
         <div className="flex-wrapper">
           <div className="sort-fields">
+            <form className="search-form" onSubmit={this.handleSearch}>
+              <input
+                type="text"
+                value={this.state.search}
+                onChange={event => this.setState({ search: event.target.value })}
+              />
+              <button type="submit" value="Submit">Search</button>
+            </form>
             <span className="filter-title">Filter by city</span>
             <Link to={this.buildQueryString('query', { city: 'Manchester' })}>Manchester</Link>
             <Link to={this.buildQueryString('query', { city: 'Leeds' })}>Leeds</Link>

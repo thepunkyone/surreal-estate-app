@@ -48,7 +48,6 @@ class AddProperty extends Component {
   handleFieldChange = (event) => {
     this.setState({
       fields: {
-        ...this.state.fields,
         [event.target.name]: event.target.value,
       },
     });
