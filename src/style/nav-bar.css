@@ -35,7 +35,7 @@
   padding: 12px 20px;
 }
 
-.nav span {
+.nav span, .nav button {
   float: right;
 }
 

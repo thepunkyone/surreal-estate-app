@@ -10,12 +10,12 @@ class App extends Component {
   };
 
   handleLogin = (response) => {
-    const { userId } = response.data;
-    this.setState({ userId: userId });
+    this.setState({ userId: response.userID });
   };
 
   handleLogout = () => {
-
+    window.FB.logout();
+    this.setState({ userId: null });
   };
 
   render() {
