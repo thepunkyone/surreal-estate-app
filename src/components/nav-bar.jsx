@@ -28,7 +28,7 @@ const NavBar = () => {
           appId="1088597931155576"
           autoLoad
           fields="name,email,picture"
-          callback={responseFacebook}
+          callback={onLogin}
         >
           Sign In With Facebook
         </FacebookLogin>
