@@ -5,21 +5,18 @@ import Properties from './properties';
 import AddProperty from './add-property';
 
 class App extends Component {
-  contructor(props) {
-    super(props);
-    this.state = {
+  state = {
 
-    };
-  }
+  };
 
   handleLogin = () => {
 
-  }
+  };
 
   render() {
     return (
       <div>
-        <NavBar onLogin={handleLogin} />
+        <NavBar onLogin={this.handleLogin} />
         <Switch>
           <Route exact path="/" component={Properties} />
           <Route exact path="/add-property" component={AddProperty} />

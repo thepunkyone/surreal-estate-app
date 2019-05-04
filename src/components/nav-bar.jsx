@@ -9,12 +9,7 @@ import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faIgloo);
 
-const responseFacebook = (response) => {
-  console.log(response);
-};
-
-
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <div className="nav-bar">
       <div className="logo">
@@ -28,7 +23,7 @@ const NavBar = () => {
           appId="1088597931155576"
           autoLoad
           fields="name,email,picture"
-          callback={onLogin}
+          callback={props.onLogin}
         >
           Sign In With Facebook
         </FacebookLogin>
