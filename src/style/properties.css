@@ -2,13 +2,21 @@
   display: flex;
 }
 
-.city-search {
+.sort-fields {
   width: 15%;
   height: 100vh;
+  background: white;
 }
 
-.city-search a, .city-search span {
+.sort-fields a, .sort-fields span {
   display: block;
+  padding: 5px 8px;
+}
+
+.sort-fields .filter-title {
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 8px;
 }
 
 .properties {
