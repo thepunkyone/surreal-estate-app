@@ -6,17 +6,22 @@ import AddProperty from './add-property';
 
 class App extends Component {
   state = {
-
+    userId: null,
   };
 
-  handleLogin = () => {
+  handleLogin = (response) => {
+    const { userId } = response.data;
+    this.setState({ userId: userId });
+  };
+
+  handleLogout = () => {
 
   };
 
   render() {
     return (
       <div>
-        <NavBar onLogin={this.handleLogin} />
+        <NavBar onLogin={this.handleLogin} onLogout={this.handleLogout} userId={this.state.userId} />
         <Switch>
           <Route exact path="/" component={Properties} />
           <Route exact path="/add-property" component={AddProperty} />
