@@ -1,6 +1,7 @@
 import React from 'react';
-import '../style/nav-bar.css';
 import { Link } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
+import '../style/nav-bar.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
