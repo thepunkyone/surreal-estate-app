@@ -33,15 +33,25 @@
   display: none;
 }
 
-.email-button {
+.email-button, .save-button {
   display: block;
   text-align: center;
-  background: rgb(57, 57, 107);
   padding: 8px;
-  border: 1px solid rgb(151, 151, 151);
+  border: 2px solid rgb(57, 57, 107);
+}
+
+.email-button {
+  background: rgb(57, 57, 107);
   color: white;
 }
 
-.email-button:hover {
+.save-button {
+  margin-top: 3px;
+  background: white;
+  color: rgb(57, 57, 107);
+}
+
+.email-button:hover, .save-button:hover {
   background: rgb(116, 116, 160);
+  color: white;
 }

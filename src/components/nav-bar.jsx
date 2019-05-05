@@ -20,7 +20,7 @@ const NavBar = (props) => {
         <Link className="item" to="/">View Properties</Link>
         <Link className="item" to="/add-property">Add a Property</Link>
         {props.userId
-          ? <button onClick={props.onLogout}>Sign Out</button>
+          ? <button onClick={props.onLogout} className="item">Sign Out</button>
           : (
             <FacebookLogin
               appId={110308195738064}

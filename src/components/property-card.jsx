@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import '../style/property-card.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo, faBath, faBed, faPoundSign, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faIgloo, faBath, faBed, faPoundSign, faEnvelope, faStar } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faIgloo, faBath, faBed, faPoundSign, faEnvelope);
+library.add(faIgloo, faBath, faBed, faPoundSign, faEnvelope, faStar);
 
 const PropertyCard = ({
   title,
@@ -44,6 +44,10 @@ const PropertyCard = ({
         <FontAwesomeIcon icon="envelope" />
         <span>EMail</span>
       </a>
+      <div className="save-button">
+        <FontAwesomeIcon icon="star" />
+        <span>Save</span>
+      </div>
     </div>
   );
 };
