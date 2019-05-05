@@ -15,6 +15,7 @@ const PropertyCard = ({
   price,
   city,
   email,
+  userId,
 }) => {
   return (
     <div className="property-card">
@@ -44,10 +45,14 @@ const PropertyCard = ({
         <FontAwesomeIcon icon="envelope" />
         <span>EMail</span>
       </a>
-      <div className="save-button">
-        <FontAwesomeIcon icon="star" />
-        <span>Save</span>
-      </div>
+      {userId &&
+        (
+          <div className="save-button">
+            <FontAwesomeIcon icon="star" />
+            <span>Save</span>
+          </div>
+        )
+      }
     </div>
   );
 };
@@ -60,6 +65,7 @@ PropertyCard.propTypes = {
   price: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default PropertyCard;

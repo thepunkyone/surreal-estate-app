@@ -97,6 +97,7 @@ class Properties extends Component {
             {this.state.properties.map(property => {
               return (
                 <PropertyCard
+                  userId={this.props.userId}
                   key={property._id}
                   {...property} //use of spread operator from walkthrough
                 />

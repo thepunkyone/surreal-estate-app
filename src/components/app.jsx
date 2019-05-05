@@ -23,7 +23,11 @@ class App extends Component {
       <div>
         <NavBar onLogin={this.handleLogin} onLogout={this.handleLogout} userId={this.state.userId} />
         <Switch>
-          <Route exact path="/" component={Properties} />
+          <Route
+            exact
+            path="/"
+            render={(props) => <Properties {...props} userId={this.state.userId} />}
+          />
           <Route exact path="/add-property" component={AddProperty} />
           <Route />
         </Switch>
