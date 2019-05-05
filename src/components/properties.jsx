@@ -60,6 +60,10 @@ class Properties extends Component {
     }
   }
 
+  handleSaveProperty = (propertyId) => {
+    axios.post(`${apiUrl}/Favourite/${propertyId}`);
+  };
+
   handleSearch = (event) => {
     event.preventDefault();
     const { search } = this.state;
@@ -99,6 +103,7 @@ class Properties extends Component {
                 <PropertyCard
                   userId={this.props.userId}
                   key={property._id}
+                  onSaveProperty={this.handleSaveProperty}
                   {...property} //use of spread operator from walkthrough
                 />
               );

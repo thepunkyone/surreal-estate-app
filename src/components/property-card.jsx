@@ -16,6 +16,7 @@ const PropertyCard = ({
   city,
   email,
   userId,
+  onSaveProperty,
 }) => {
   return (
     <div className="property-card">
@@ -49,7 +50,7 @@ const PropertyCard = ({
         (
           <div className="save-button">
             <FontAwesomeIcon icon="star" />
-            <span>Save</span>
+            <span onClick={onSaveProperty}>Save</span>
           </div>
         )
       }
@@ -65,7 +66,8 @@ PropertyCard.propTypes = {
   price: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.string,
+  onSaveProperty: PropTypes.func.isRequired,
 };
 
 export default PropertyCard;
