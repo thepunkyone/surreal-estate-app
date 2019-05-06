@@ -51,6 +51,10 @@
   color: rgb(57, 57, 107);
 }
 
+.save-button:hover {
+  cursor: pointer;
+}
+
 .email-button:hover, .save-button:hover {
   background: rgb(116, 116, 160);
   color: white;

@@ -20,6 +20,7 @@ class Properties extends Component {
       properties: [],
       search: '',
       isError: false,
+      saveError: false,
     };
   }
 
@@ -61,7 +62,16 @@ class Properties extends Component {
   }
 
   handleSaveProperty = (propertyId) => {
-    axios.post(`${apiUrl}/Favourite/${propertyId}`);
+    axios.post(
+      `${apiUrl}/Favourite/`,
+      {
+        propertyListing: propertyId,
+        fbUserId: this.props.userId,
+      }
+    )
+      .catch(() => {
+        this.setState({ saveError: true });
+      });
   };
 
   handleSearch = (event) => {
@@ -76,6 +86,7 @@ class Properties extends Component {
     return (
       <Fragment>
         {this.state.isError && <Alert message="Server error! Could not retrieve properties." />}
+        {this.state.saveError && <Alert message="Server error! Could not add to favourites." />}
         <div className="flex-wrapper">
           <div className="sort-fields">
             <form className="search-form" onSubmit={this.handleSearch}>

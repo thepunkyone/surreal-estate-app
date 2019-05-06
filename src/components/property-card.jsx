@@ -8,6 +8,7 @@ import { faIgloo, faBath, faBed, faPoundSign, faEnvelope, faStar } from '@fortaw
 library.add(faIgloo, faBath, faBed, faPoundSign, faEnvelope, faStar);
 
 const PropertyCard = ({
+  _id,
   title,
   type,
   bathrooms,
@@ -50,7 +51,7 @@ const PropertyCard = ({
         (
           <div className="save-button">
             <FontAwesomeIcon icon="star" />
-            <span onClick={onSaveProperty}>Save</span>
+            <span onClick={() => onSaveProperty(_id)}>Save</span>
           </div>
         )
       }
