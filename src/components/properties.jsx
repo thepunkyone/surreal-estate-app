@@ -18,6 +18,7 @@ class Properties extends Component {
     super(props);
     this.state = {
       properties: [],
+      favourites: [],
       search: '',
       isError: false,
       saveError: false,
@@ -38,8 +39,7 @@ class Properties extends Component {
   };
 
   componentDidMount() {
-    const url = `${apiUrl}/PropertyListing/`;
-    axios.get(url)
+    axios.get(`${apiUrl}/PropertyListing/`)
       .then(({ data: properties }) => {
         this.setState({ properties });
       })
@@ -50,6 +50,7 @@ class Properties extends Component {
 
   componentDidUpdate(prevProps) {
     const { search } = this.props.location;
+    const { userId } = this.props;
     if (prevProps.location.search !== search) {
       axios.get(`${apiUrl}/PropertyListing/${search}`)
         .then(({ data: properties }) => {
@@ -59,6 +60,17 @@ class Properties extends Component {
           this.setState({ isError: true });
         });
     }
+
+    if (userId !== prevProps.userId) {
+      axios.get(`${apiUrl}/Favourite/?populate=propertyListing`)
+        .then(({ data: favourites }) => {
+          this.setState({ favourites });
+        })
+        .catch(() => {
+          this.setState({ isError: true });
+        });
+    }
+    console.log(this.state.favourites);
   }
 
   handleSaveProperty = (propertyId) => {
@@ -81,6 +93,10 @@ class Properties extends Component {
     const { history } = this.props;
     history.push(newQueryString);
   };
+
+  // isFavourite = (propertyId) => {
+  //   this.state.favourites.some(propertyId);
+  // };
 
   render() {
     return (
@@ -115,7 +131,8 @@ class Properties extends Component {
                   userId={this.props.userId}
                   key={property._id}
                   onSaveProperty={this.handleSaveProperty}
-                  {...property} //use of spread operator from walkthrough
+                  // favourite={this.isFavourite(property._id)}
+                  {...property} // use of spread operator from walkthrough
                 />
               );
             })}

@@ -18,6 +18,7 @@ const PropertyCard = ({
   email,
   userId,
   onSaveProperty,
+  favourite,
 }) => {
   return (
     <div className="property-card">
@@ -47,7 +48,15 @@ const PropertyCard = ({
         <FontAwesomeIcon icon="envelope" />
         <span>EMail</span>
       </a>
-      {userId &&
+      {userId && favourite &&
+        (
+          <div className="save-button">
+            <FontAwesomeIcon icon="star" />
+            <span>Favourites</span>
+          </div>
+        )
+      }
+      { userId &&
         (
           <div className="save-button">
             <FontAwesomeIcon icon="star" />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from './nav-bar';
 import Properties from './properties';
+import Favourites from './favourites';
 import AddProperty from './add-property';
 
 class App extends Component {
@@ -27,6 +28,11 @@ class App extends Component {
             exact
             path="/"
             render={(props) => <Properties {...props} userId={this.state.userId} />}
+          />
+          <Route
+            exact
+            path="/favourites"
+            render={(props) => <Favourites {...props} userId={this.state.userId} />}
           />
           <Route exact path="/add-property" component={AddProperty} />
           <Route />
