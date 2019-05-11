@@ -31,8 +31,8 @@ class App extends Component {
           />
           <Route
             exact
-            path="/favourites"
-            render={(props) => <Favourites {...props} userId={this.state.userId} />}
+            path="/saved-properties"
+            render={(props) => <Favourites {...props} userId={this.state.userId} favourites={this.state.favourites} />}
           />
           <Route exact path="/add-property" component={AddProperty} />
           <Route />

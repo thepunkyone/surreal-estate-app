@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import '../style/nav-bar.css';
@@ -20,7 +20,12 @@ const NavBar = (props) => {
         <Link className="item" to="/">View Properties</Link>
         <Link className="item" to="/add-property">Add a Property</Link>
         {props.userId
-          ? <button onClick={props.onLogout} className="item">Sign Out</button>
+          ? (
+            <Fragment>
+              <button onClick={props.onLogout} className="item">Sign Out</button>
+              <Link className="item" to="/saved-properties">Saved Properties</Link>
+            </Fragment>
+          )
           : (
             <FacebookLogin
               appId={110308195738064}

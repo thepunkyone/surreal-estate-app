@@ -51,11 +51,16 @@
   color: rgb(57, 57, 107);
 }
 
+.remove-button {
+  background: rgb(116, 116, 160);
+  color: white;
+}
+
 .save-button:hover {
   cursor: pointer;
 }
 
 .email-button:hover, .save-button:hover {
-  background: rgb(116, 116, 160);
-  color: white;
+  background: lavender;
+  color: rgb(57, 57, 107);
 }
