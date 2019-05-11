@@ -18,7 +18,8 @@ const PropertyCard = ({
   email,
   userId,
   onSaveProperty,
-  favourite,
+  onRemoveProperty,
+  isFavourite,
 }) => {
   return (
     <div className="property-card">
@@ -48,19 +49,19 @@ const PropertyCard = ({
         <FontAwesomeIcon icon="envelope" />
         <span>EMail</span>
       </a>
-      {userId && favourite &&
+      {userId && isFavourite === true &&
         (
-          <div className="save-button">
+          <div className="save-button" onClick={() => onRemoveProperty(_id)}>
             <FontAwesomeIcon icon="star" />
             <span>Favourites</span>
           </div>
         )
       }
-      { userId &&
+      { userId && !isFavourite &&
         (
-          <div className="save-button">
+          <div className="save-button" onClick={() => onSaveProperty(_id)}>
             <FontAwesomeIcon icon="star" />
-            <span onClick={() => onSaveProperty(_id)}>Save</span>
+            <span>Add Favourite</span>
           </div>
         )
       }

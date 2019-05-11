@@ -38,14 +38,12 @@ class Properties extends Component {
     return qs.stringify(newQueryParams, { addQueryPrefix: true, encoding: false });
   };
 
+  checkFavourite = (propertyId) => {
+    return this.state.favourites.some(favourite => favourite.propertyListing._id === propertyId);
+  };
+
   componentDidMount() {
-    axios.get(`${apiUrl}/PropertyListing/`)
-      .then(({ data: properties }) => {
-        this.setState({ properties });
-      })
-      .catch(() => {
-        this.setState({ isError: true });
-      });
+    this.getProperties();
   }
 
   componentDidUpdate(prevProps) {
@@ -62,16 +60,43 @@ class Properties extends Component {
     }
 
     if (userId !== prevProps.userId) {
-      axios.get(`${apiUrl}/Favourite/?populate=propertyListing`)
-        .then(({ data: favourites }) => {
-          this.setState({ favourites });
-        })
-        .catch(() => {
-          this.setState({ isError: true });
-        });
+      this.getFavourites();
     }
-    console.log(this.state.favourites);
   }
+
+  getFavourites = () => {
+    axios.get(`${apiUrl}/Favourite/?populate=propertyListing`)
+      .then(({ data: favourites }) => {
+        this.setState({ favourites });
+      })
+      .catch(() => {
+        this.setState({ isError: true });
+      });
+  };
+
+  getProperties = () => {
+    axios.get(`${apiUrl}/PropertyListing/`)
+      .then(({ data: properties }) => {
+        this.setState({ properties });
+      })
+      .catch(() => {
+        this.setState({ isError: true });
+      });
+  };
+
+  handleRemoveProperty = (propertyId) => {
+    const favourite = this.state.favourites.find(property => {
+      return property.propertyListing._id === propertyId;
+    });
+    axios.delete(`${apiUrl}/Favourite/${favourite._id}`)
+      .then(() => {
+        this.getFavourites();
+        this.getProperties();
+      })
+      .catch(() => {
+        this.setState({ saveError: true });
+      });
+  };
 
   handleSaveProperty = (propertyId) => {
     axios.post(
@@ -81,10 +106,15 @@ class Properties extends Component {
         fbUserId: this.props.userId,
       }
     )
+      .then(() => {
+        this.getFavourites();
+        this.getProperties();
+      })
       .catch(() => {
         this.setState({ saveError: true });
       });
   };
+
 
   handleSearch = (event) => {
     event.preventDefault();
@@ -93,10 +123,6 @@ class Properties extends Component {
     const { history } = this.props;
     history.push(newQueryString);
   };
-
-  // isFavourite = (propertyId) => {
-  //   this.state.favourites.some(propertyId);
-  // };
 
   render() {
     return (
@@ -131,7 +157,8 @@ class Properties extends Component {
                   userId={this.props.userId}
                   key={property._id}
                   onSaveProperty={this.handleSaveProperty}
-                  // favourite={this.isFavourite(property._id)}
+                  onRemoveProperty={this.handleRemoveProperty}
+                  isFavourite={this.checkFavourite(property._id)}
                   {...property} // use of spread operator from walkthrough
                 />
               );
