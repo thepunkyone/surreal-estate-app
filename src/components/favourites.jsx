@@ -12,6 +12,16 @@ class Favourites extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getFavourites();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.userId !== prevProps.userId) {
+      this.getFavourites();
+    }
+  }
+
   getFavourites = () => {
     axios.get(`${apiUrl}/Favourite/?populate=propertyListing`)
       .then(({ data }) => {
@@ -23,27 +33,8 @@ class Favourites extends Component {
       });
   };
 
-  handleRemoveProperty = (propertyId) => {
-    const favourite = this.state.favourites.find(property => {
-      return property.propertyListing._id === propertyId;
-    });
-    axios.delete(`${apiUrl}/Favourite/${favourite._id}`)
-      .then(() => {
-        this.getFavourites();
-      })
-      .catch(() => {
-        this.setState({ saveError: true });
-      });
-  };
-
-  handleSaveProperty = (propertyId) => {
-    axios.post(
-      `${apiUrl}/Favourite/`,
-      {
-        propertyListing: propertyId,
-        fbUserId: this.props.userId,
-      }
-    )
+  handleRemoveFavourite = (favouriteId) => {
+    axios.delete(`${apiUrl}/Favourite/${favouriteId}`)
       .then(() => {
         this.getFavourites();
       })
@@ -54,7 +45,18 @@ class Favourites extends Component {
 
   render() {
     return (
-      <div>favourites</div>
+      <div className="favourites">
+        {
+          this.state.favourites.map(favourite => {
+            return (
+              <div key={favourite._id} className="favourite">
+                <span>{favourite.propertyListing.title}</span>
+                <button onClick={() => this.handleRemoveFavourite(favourite._id)}>Remove</button>
+              </div>
+            );
+          })
+        }
+      </div>
     );
   }
 }

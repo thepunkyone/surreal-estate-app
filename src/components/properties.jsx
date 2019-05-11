@@ -44,6 +44,10 @@ class Properties extends Component {
 
   componentDidMount() {
     this.getProperties();
+    const { userId } = this.props;
+    if (userId !== null) {
+      this.getFavourites();
+    }
   }
 
   componentDidUpdate(prevProps) {

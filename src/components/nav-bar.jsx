@@ -22,7 +22,7 @@ const NavBar = (props) => {
         {props.userId
           ? (
             <Fragment>
-              <button onClick={props.onLogout} className="item">Sign Out</button>
+              <button className="item" onClick={props.onLogout}>Sign Out</button>
               <Link className="item" to="/saved-properties">Saved Properties</Link>
             </Fragment>
           )
