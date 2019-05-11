@@ -66,7 +66,8 @@ class Properties extends Component {
 
   getFavourites = () => {
     axios.get(`${apiUrl}/Favourite/?populate=propertyListing`)
-      .then(({ data: favourites }) => {
+      .then(({ data }) => {
+        const favourites = data.filter(favourite => favourite.fbUserId === this.props.userId);
         this.setState({ favourites });
       })
       .catch(() => {

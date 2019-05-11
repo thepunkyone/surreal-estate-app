@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Properties from '../../src/components/properties';
 import axios from 'axios';
 
-const MOCK_PROPERTIES = {data: [
+const MOCK_PROPERTIES = { data: [
   {
     _id: 1,
     title: 'A quirky little house!',

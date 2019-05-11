@@ -29,6 +29,6 @@ describe('Favourites Component', () => {
     ));
   });
   it('Renders only favourites which correspond to userId', () => {
-    expect().toBe();
+    expect(wrapper.find('.favourite')).toHaveLength(2);
   });
 });
