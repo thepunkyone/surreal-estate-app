@@ -54,6 +54,10 @@ describe('Favourites Component', () => {
     ));
   });
 
+  it('GETs favourites from the database', () => {
+    expect(axios.get).toHaveBeenCalledWith('mockApiUrl/Favourite/?populate=propertyListing');
+  });
+
   it('Renders only favourites which correspond to userId', () => {
     expect(wrapper.find('.favourite')).toHaveLength(2);
   });
