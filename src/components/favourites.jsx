@@ -49,7 +49,7 @@ class Favourites extends Component {
         {
           this.state.favourites.map(favourite => {
             return (
-              <div key={favourite._id} favouriteId={favourite._id} className="favourite">
+              <div key={favourite._id} favourite-id={favourite._id} className="favourite">
                 <span>{favourite.propertyListing.title}</span>
                 <button onClick={() => this.handleRemoveFavourite(favourite._id)}>Remove</button>
               </div>

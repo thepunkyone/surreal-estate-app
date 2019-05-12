@@ -59,7 +59,7 @@ describe('Favourites Component', () => {
   });
 
   it('Deletes a favourite with the selected _id', () => {
-    wrapper.find('.favourite[favouriteId="1234"] button').simulate('click');
+    wrapper.find('.favourite[favourite-id="1234"] button').simulate('click');
     expect(axios.delete).toHaveBeenCalledWith('mockApiUrl/Favourite/1234');
   });
 });
