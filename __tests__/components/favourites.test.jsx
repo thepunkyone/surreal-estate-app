@@ -37,8 +37,9 @@ const deleteFavourite = {
   data: '',
 };
 
-// jest.mock('apiUrl');
+jest.mock('../../src/config', () => 'mockApiUrl');
 jest.mock('axios');
+
 const getFavouritesResponse = Promise.resolve(mockFavourites);
 axios.get.mockImplementation(() => getFavouritesResponse);
 
@@ -59,6 +60,6 @@ describe('Favourites Component', () => {
 
   it('Deletes a favourite with the selected _id', () => {
     wrapper.find('.favourite[favouriteId="1234"] button').simulate('click');
-    expect(axios.delete).toHaveBeenCalledWith('http://localhost:3000/api/v1/Favourite/1234');
+    expect(axios.delete).toHaveBeenCalledWith('mockApiUrl/Favourite/1234');
   });
 });
