@@ -7,26 +7,43 @@ const mockFavourites = {
   data: [
     {
       _id: '1234',
-      propertyListing: '2345',
+      propertyListing: {
+        _id: '2345',
+        title: 'Very nice flat!',
+      },
       fbUserId: '3456',
 
     },
     {
       _id: '6776',
-      propertyListing: '5432',
+      propertyListing: {
+        _id: '5432',
+        title: 'A bright, airy house',
+      },
       fbUserId: '3456',
     },
     {
       _id: '0987',
-      propertyListing: '8765',
+      propertyListing: {
+        _id: '8765',
+        title: 'Surprisingly spacious flat',
+      },
       fbUserId: '5678',
     },
   ],
 };
 
+const deleteFavourite = {
+  data: '',
+};
+
+// jest.mock('apiUrl');
 jest.mock('axios');
-const getPropertiesMock = Promise.resolve(mockFavourites);
-axios.get.mockImplementation(() => getPropertiesMock);
+const getFavouritesResponse = Promise.resolve(mockFavourites);
+axios.get.mockImplementation(() => getFavouritesResponse);
+
+const deleteFavouriteResponse = Promise.resolve(deleteFavourite);
+axios.delete.mockImplementation(() => deleteFavouriteResponse);
 
 describe('Favourites Component', () => {
   let wrapper;
@@ -35,9 +52,13 @@ describe('Favourites Component', () => {
       <Favourites userId="3456" />
     ));
   });
+
   it('Renders only favourites which correspond to userId', () => {
-    getPropertiesMock.then(() => {
-      expect(wrapper.find('.favourite')).toHaveLength(2);
-    });
+    expect(wrapper.find('.favourite')).toHaveLength(2);
+  });
+
+  it('Deletes a favourite with the selected _id', () => {
+    wrapper.find('.favourite[favouriteId="1234"] button').simulate('click');
+    expect(axios.delete).toHaveBeenCalledWith('http://localhost:3000/api/v1/Favourite/1234');
   });
 });

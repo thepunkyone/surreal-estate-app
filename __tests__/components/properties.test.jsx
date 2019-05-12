@@ -44,9 +44,9 @@ const getPropertiesMock = Promise.resolve(MOCK_PROPERTIES);
 axios.get.mockImplementation(() => getPropertiesMock);
 
 describe('Properties component test', () => {
-  const wrapper = shallow(
+  const wrapper = shallow((
     <Properties />
-  );
+  ));
 
   it('Properties component renders the correct number of PropertyCard components', (done) => {
     getPropertiesMock.then(() => {
