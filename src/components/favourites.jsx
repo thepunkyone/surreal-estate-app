@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiUrl from '../config';
+import '../style/favourites.css';
 
 class Favourites extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class Favourites extends Component {
             return (
               <div key={favourite._id} favourite-id={favourite._id} className="favourite">
                 <span>{favourite.propertyListing.title}</span>
-                <button onClick={() => this.handleRemoveFavourite(favourite._id)}>Remove</button>
+                <button className="remove" onClick={() => this.handleRemoveFavourite(favourite._id)}>Remove</button>
               </div>
             );
           })
