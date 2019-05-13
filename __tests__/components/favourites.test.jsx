@@ -62,6 +62,13 @@ describe('Favourites Component', () => {
     expect(wrapper.find('.favourite')).toHaveLength(2);
   });
 
+  it('No favourites rendered for a non-existing userId', () => {
+    wrapper = shallow((
+      <Favourites userId={null} />
+    ));
+    expect(wrapper.find('.favourite')).toHaveLength(0);
+  });
+
   it('Deletes a favourite with the selected _id', () => {
     wrapper.find('.favourite[favourite-id="1234"] button').simulate('click');
     expect(axios.delete).toHaveBeenCalledWith('mockApiUrl/Favourite/1234');

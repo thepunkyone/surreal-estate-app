@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiUrl from '../config';
+import Alert from './alert';
 import '../style/favourites.css';
 
 class Favourites extends Component {
@@ -47,6 +48,8 @@ class Favourites extends Component {
   render() {
     return (
       <div className="favourites">
+        {this.state.isError && <Alert message="Could not retrieve saved properties! Try again later." />}
+        {this.state.saveError && <Alert message="Could not edit saved properties! Try again later." />}
         {
           this.state.favourites.map(favourite => {
             return (
