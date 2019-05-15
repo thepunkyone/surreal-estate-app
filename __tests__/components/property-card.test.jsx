@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import axios from 'axios';
 import PropertyCard from '../../src/components/property-card';
 
+//must add axios requests
+
 describe('PropertyCard component test', () => {
   let wrapper;
   beforeEach(() => {
