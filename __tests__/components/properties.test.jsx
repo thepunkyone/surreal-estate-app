@@ -53,7 +53,8 @@ jest.mock('axios');
 
 const getPropertiesResponse = Promise.resolve(mockProperties);
 axios.get.mockImplementation(() => getPropertiesResponse);
-axios.post.mockImplementation(() => Promise.resolve());
+const postSavedPropertyResponse = Promise.resolve();
+axios.post.mockImplementation(() => postSavedPropertyResponse);
 
 describe('Properties component - without userId', () => {
   let wrapper;
@@ -68,15 +69,15 @@ describe('Properties component - without userId', () => {
   it('Gets property listings', () => {
     return getPropertiesResponse.then(() => {
       wrapper.update();
-      console.log(wrapper.debug());
       expect(axios.get).toHaveBeenCalledWith('mockApiUrl/PropertyListing/');
       expect(axios.get).not.toHaveBeenCalledWith('mockApiUrl/Favourite/?populate=propertyListing');
+      expect(wrapper.find(PropertyCard)).toHaveLength(3);
     });
   });
 
   it('Updates history when search form submitted', () => {
     wrapper.find('.search-form').simulate('submit');
-    expect(wrapper.find(PropertyCard).prop('history')).toEqual(['?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22%22%7D%7D']);
+    expect(wrapper.find(Properties).prop('history')).toEqual(['?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22%22%7D%7D']);
   });
 });
 
@@ -96,8 +97,9 @@ describe('Properties component - with userId', () => {
   });
 
   it('Add favourites', () => {
-    console.log(wrapper.find(PropertyCard).debug());
-    wrapper.find(PropertyCard).get(0);
-    // expect(axios.post).toHaveBeenCalledWith('mockApiUrl/Favourite', postFavourite);
+    wrapper.update();
+    const saveButton = wrapper.find('.property-card .save-button').at(0);
+    saveButton.simulate('click');
+    expect(axios.post).toHaveBeenCalledWith('mockApiUrl/Favourite/', postFavourite);
   });
 });
