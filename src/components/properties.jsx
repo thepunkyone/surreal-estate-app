@@ -133,7 +133,7 @@ class Properties extends Component {
     return (
       <Fragment>
         {this.state.isError && <Alert message="Server error! Could not retrieve properties." />}
-        {this.state.saveError && <Alert message="Server error! Could not add to favourites." />}
+        {this.state.saveError && <Alert message="Server error! Could not edit saved properties." />}
         <div className="flex-wrapper">
           <div className="sort-fields">
             <form className="search-form" onSubmit={this.handleSearch}>
