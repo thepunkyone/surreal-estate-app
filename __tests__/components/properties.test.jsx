@@ -1,44 +1,10 @@
 import '../../src/jsdom';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import { mount } from 'enzyme';
 import Properties from '../../src/components/properties';
 import PropertyCard from '../../src/components/property-card';
 import axios from 'axios';
-
-const postFavourite = {
-  propertyListing: '2',
-  fbUserId: '1234',
-};
-
-const mockFavourites = {
-  data: [
-    {
-      _id: '6556',
-      propertyListing: {
-        _id: '1',
-        title: 'A quirky little house!',
-      },
-      fbUserId: '1234',
-    },
-    {
-      _id: '6776',
-      propertyListing: {
-        _id: '2',
-        title: 'A very nice bungalow!',
-      },
-      fbUserId: '7890',
-    },
-    {
-      _id: '0987',
-      propertyListing: {
-        _id: '3',
-        title: 'Great house, under offer!',
-      },
-      fbUserId: '1234',
-    },
-  ],
-};
 
 const mockProperties = { 
   data: [
@@ -75,6 +41,40 @@ const mockProperties = {
   ],
 };
 
+const mockFavourites = {
+  data: [
+    {
+      _id: '6556',
+      propertyListing: {
+        _id: '1',
+        title: 'A quirky little house!',
+      },
+      fbUserId: '1234',
+    },
+    {
+      _id: '6776',
+      propertyListing: {
+        _id: '2',
+        title: 'A very nice bungalow!',
+      },
+      fbUserId: '7890',
+    },
+    {
+      _id: '0987',
+      propertyListing: {
+        _id: '3',
+        title: 'Great house, under offer!',
+      },
+      fbUserId: '1234',
+    },
+  ],
+};
+
+const postFavourite = {
+  propertyListing: '2',
+  fbUserId: '1234',
+};
+
 const mockLocation = { pathname: '/', search: '' };
 
 jest.mock('../../src/config', () => 'mockApiUrl');
@@ -82,6 +82,7 @@ jest.mock('axios');
 
 const getPropertiesResponse = Promise.resolve(mockProperties);
 const getFavouritesResponse = Promise.resolve(mockFavourites);
+const getSearchResponse = Promise.resolve(mockProperties.data[1]);
 axios.get.mockImplementation((url) => {
   if (url === 'mockApiUrl/PropertyListing/') {
     return getPropertiesResponse;
@@ -89,6 +90,10 @@ axios.get.mockImplementation((url) => {
   if (url === 'mockApiUrl/Favourite/?populate=propertyListing') {
     return getFavouritesResponse;
   }
+  if (url === 'mockApiUrl/PropertyListing/?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22nice%22%7D%7D') {
+    return getSearchResponse;
+  }
+  return Promise.reject();
 });
 const postSavedPropertyResponse = Promise.resolve();
 axios.post.mockImplementation(() => postSavedPropertyResponse);
@@ -100,7 +105,11 @@ describe('Properties component - without userId', () => {
   beforeEach(() => {
     wrapper = mount((
       <MemoryRouter>
-        <Properties location={mockLocation} history={[]} userId={null} />
+        <Route
+          exact
+          path="/"
+          render={(props) => <Properties {...props} userId={null} />}
+        />
       </MemoryRouter>
     ));
   });
@@ -114,9 +123,28 @@ describe('Properties component - without userId', () => {
     });
   });
 
-  it('Updates history when search form submitted', () => {
+  it('Updates browser history when search form submitted', () => {
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'Manchester' } });
     wrapper.find('.search-form').simulate('submit');
-    expect(wrapper.find(Properties).prop('history')).toEqual(['?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22%22%7D%7D']);
+    expect(wrapper.find(Properties).prop('history').location.search).toBe('?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22Manchester%22%7D%7D');
+  });
+
+  xit('Calls axios with search query', () => {
+    return getSearchResponse.then(() => {
+      wrapper.update();
+      wrapper.find('input').at(0).simulate('change', { target: { value: 'nice' } });
+      wrapper.find('.search-form').simulate('submit');
+      expect(axios.get).toHaveBeenCalledWith('mockApiUrl/PropertyListing/?query=%7B%22title%22%3A%7B%22%24regex%22%3A%22nice%22%7D%7D');
+    });
+  });
+
+  xit('Displays PropertyCard components filtered by search query', () => {
+    return getSearchResponse.then(() => {
+      wrapper.update();
+      wrapper.find('input').at(0).simulate('change', { target: { value: 'nice' } });
+      wrapper.find('.search-form').simulate('submit');
+      expect(wrapper.find('.property-card').prop('title')).toBe('A very nice bungalow!');
+    });
   });
 });
 
