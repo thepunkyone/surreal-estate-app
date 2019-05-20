@@ -57,7 +57,6 @@ class Properties extends Component {
       axios.get(`${apiUrl}/PropertyListing/${search}`)
         .then(({ data: properties }) => {
           this.setState({ properties });
-          console.log('Search', properties);
         })
         .catch(() => {
           this.setState({ isError: true });
