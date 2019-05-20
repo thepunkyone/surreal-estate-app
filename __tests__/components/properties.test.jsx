@@ -1,14 +1,43 @@
 import '../../src/jsdom';
 import React from 'react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 import Properties from '../../src/components/properties';
 import PropertyCard from '../../src/components/property-card';
 import axios from 'axios';
 
 const postFavourite = {
-  propertyListing: '1',
+  propertyListing: '2',
   fbUserId: '1234',
+};
+
+const mockFavourites = {
+  data: [
+    {
+      _id: '6556',
+      propertyListing: {
+        _id: '1',
+        title: 'A quirky little house!',
+      },
+      fbUserId: '1234',
+    },
+    {
+      _id: '6776',
+      propertyListing: {
+        _id: '2',
+        title: 'A very nice bungalow!',
+      },
+      fbUserId: '7890',
+    },
+    {
+      _id: '0987',
+      propertyListing: {
+        _id: '3',
+        title: 'Great house, under offer!',
+      },
+      fbUserId: '1234',
+    },
+  ],
 };
 
 const mockProperties = { 
@@ -52,9 +81,19 @@ jest.mock('../../src/config', () => 'mockApiUrl');
 jest.mock('axios');
 
 const getPropertiesResponse = Promise.resolve(mockProperties);
-axios.get.mockImplementation(() => getPropertiesResponse);
+const getFavouritesResponse = Promise.resolve(mockFavourites);
+axios.get.mockImplementation((url) => {
+  if (url === 'mockApiUrl/PropertyListing/') {
+    return getPropertiesResponse;
+  }
+  if (url === 'mockApiUrl/Favourite/?populate=propertyListing') {
+    return getFavouritesResponse;
+  }
+});
 const postSavedPropertyResponse = Promise.resolve();
 axios.post.mockImplementation(() => postSavedPropertyResponse);
+const deleteSavedPropertyResponse = Promise.resolve();
+axios.delete.mockImplementation(() => deleteSavedPropertyResponse);
 
 describe('Properties component - without userId', () => {
   let wrapper;
@@ -81,6 +120,7 @@ describe('Properties component - without userId', () => {
   });
 });
 
+
 describe('Properties component - with userId', () => {
   let wrapper;
   beforeEach(() => {
@@ -91,15 +131,50 @@ describe('Properties component - with userId', () => {
     ));
   });
 
-  it('Gets favourites', () => {
+  it('Gets properties and favourites', () => {
     expect(axios.get).toHaveBeenCalledWith('mockApiUrl/PropertyListing/');
     expect(axios.get).toHaveBeenCalledWith('mockApiUrl/Favourite/?populate=propertyListing');
+    expect(wrapper.find(Properties).state('properties')).toEqual(mockProperties.data);
+    expect(wrapper.find(Properties).state('favourites')).toEqual([
+      {
+        _id: '6556',
+        propertyListing: {
+          _id: '1',
+          title: 'A quirky little house!',
+        },
+        fbUserId: '1234',
+      },
+      {
+        _id: '0987',
+        propertyListing: {
+          _id: '3',
+          title: 'Great house, under offer!',
+        },
+        fbUserId: '1234',
+      },
+    ]);
   });
 
-  it('Add favourites', () => {
+  it('Checks favourites vs non-favourited properties and populates save/remove buttons', () => {
     wrapper.update();
-    const saveButton = wrapper.find('.property-card .save-button').at(0);
+    expect(wrapper.find('.property-card')).toHaveLength(3);
+    expect(wrapper.find('.property-card .save-button')).toHaveLength(3);
+    expect(wrapper.find('.property-card .remove-button')).toHaveLength(2);
+  });
+
+  it('Posts favourite', () => {
+    wrapper.update();
+    const saveButton = wrapper.find('.property-card .save-button').at(1);
     saveButton.simulate('click');
     expect(axios.post).toHaveBeenCalledWith('mockApiUrl/Favourite/', postFavourite);
+  });
+
+  it('Deletes favourite', () => {
+    return getFavouritesResponse.then(() => {
+      wrapper.update();
+      const removeButton = wrapper.find('.property-card .remove-button').at(0);
+      removeButton.simulate('click');
+      expect(axios.delete).toHaveBeenCalledWith('mockApiUrl/Favourite/6556');
+    });
   });
 });
