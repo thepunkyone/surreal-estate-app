@@ -1,0 +1,64 @@
+.flex-wrapper {
+  display: flex;
+}
+
+.sort-fields {
+  width: 15%;
+  align-self: stretch;
+  background: white;
+}
+
+.sort-fields a, .sort-fields span {
+  display: block;
+  padding: 5px 8px;
+}
+
+.sort-fields a:hover, .sort-fields a:active {
+  background: lavender;
+}
+
+.sort-fields form {
+  width:100%;
+}
+
+.sort-fields input, .sort-fields button {
+  margin-top: 5px;
+  display: inline-block;
+  border-radius: 0;
+}
+
+.sort-fields input {
+  width: calc(100% - 44px);
+  margin-left: 5px;
+  height: 25px;
+  padding: 0;
+}
+
+.sort-fields button {
+  width:29px;
+  border: none;
+  height: 29px;
+  margin-right: 5px;
+  vertical-align: bottom;
+  padding: 0;
+  background: rgb(57, 57, 107);
+  color: white;
+}
+
+.sort-fields .filter-title {
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.properties {
+  display: flex;
+  width: 85%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.property-card {
+  margin: 5px;
+  width: 30%;
+}

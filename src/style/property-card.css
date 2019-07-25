@@ -1,0 +1,66 @@
+
+.property-card {
+  background: white;
+  padding: 6px;
+}
+
+.header {
+  text-align: center;
+  padding: 40px;
+  background: lavender;
+  font-size: 1.5em;
+  color: rgb(57, 57, 107);
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.property-card span {
+  width: auto;
+  padding: 4px;
+}
+
+.property-card .type {
+  padding-left: 0;
+}
+
+.type, .city {
+  font-style: italic;
+}
+
+.email {
+  display: none;
+}
+
+.email-button, .save-button {
+  display: block;
+  text-align: center;
+  padding: 8px;
+  border: 2px solid rgb(57, 57, 107);
+}
+
+.email-button {
+  background: rgb(57, 57, 107);
+  color: white;
+}
+
+.save-button {
+  margin-top: 3px;
+  background: white;
+  color: rgb(57, 57, 107);
+}
+
+.remove-button {
+  background: rgb(116, 116, 160);
+  color: white;
+}
+
+.save-button:hover {
+  cursor: pointer;
+}
+
+.email-button:hover, .save-button:hover {
+  background: lavender;
+  color: rgb(57, 57, 107);
+}

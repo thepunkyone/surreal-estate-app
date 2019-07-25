@@ -1,0 +1,41 @@
+.add-property {
+  padding: 20px;
+}
+
+form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  padding-bottom: 8px;
+}
+
+span {
+  display: inline-block;
+  width: 100px;
+}
+
+input, select {
+  margin-left: 20px;
+  padding: 3px 0;
+}
+
+input {
+  width: 266px;
+}
+
+select {
+  width: 280px;
+}
+
+button {
+  width: 100%;
+  padding: 8px 0;
+}
+
+button:hover {
+  cursor: pointer;
+  color: gray;
+}
